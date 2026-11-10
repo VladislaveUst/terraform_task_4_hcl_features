@@ -9,7 +9,7 @@ resource "azurerm_linux_virtual_machine" "main" {
   name                              = "${var.prefix}-vm-${count.index + 1}"
   location                          = azurerm_resource_group.example.location
   resource_group_name               = azurerm_resource_group.example.name
-  network_interface_ids             = [azurerm_network_interface.main[local.nic_names[count.index]].id]
+  network_interface_ids             = [azurerm_network_interface.main[keys(azurerm_network_interface.main)[count.index]].id]
   size                              = var.vm_size
   admin_username                    = "testadmin"
   disable_password_authentication   = true
